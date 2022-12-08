@@ -1,0 +1,12 @@
+app/node_modules
+app/dist
+.vscode/
+app/.env
+app/package-lock.json
+app/tsconfig.json
+node_modules/
+.env
+W
+dist/
+package-lock.json
+log.txt
