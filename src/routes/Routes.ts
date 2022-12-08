@@ -30,7 +30,7 @@ export class Routes {
 
         // Student
         app.route('/api/student').get(this.securityController.observe, this.methodAsync(this.studentController.getProfile), this.errorHandle)
-        app.route('/api/student/course/:courseId').update(this.securityController.observe, this.methodAsync(this.studentController.getProfile), this.errorHandle)
+        app.route('/api/student/course/:courseId').put(this.securityController.observe, this.methodAsync(this.studentController.getProfile), this.errorHandle)
 
         // Author
         app.route('/api/author').get(this.securityController.observe, this.methodAsync(this.studentController.getProfile), this.errorHandle)
