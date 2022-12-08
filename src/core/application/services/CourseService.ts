@@ -27,15 +27,28 @@ export class CourseService {
     public async getAll(auth: AuthInterface,request) {
         let courses  = this.repository.getAll(auth, request);
 
-        return courses
+        return courses.map(course=>{
+            return {
+                id: course.id,
+                name: course.name,
+                imgUrl: course.imgUrl,
+                starRating: 0,
+                abstract: course.abstract
+            }
+        })
     }
 
-    public async saveCourse(auth: AuthInterface,request) {
+    public async saveCourse(auth: AuthInterface,data) {
+        const request = data.courseModel
         if (!auth) {
             ErrorCustom.generate(unauthorized('Peticion no permitida'))
         }
+        console.log('COURSE NEW: ', request)
         const COURSE= Course.builder(auth.authorId, request.name, request.imgUrl, request.abstract);
+        console.log('COURSE: ', COURSE)
         await COURSE.save();
+        return COURSE
+
     }
 
     public async update(auth: AuthInterface, courseId,request) {

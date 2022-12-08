@@ -19,7 +19,7 @@ export class CourseController {
         const factory = new CourseFactory()
         ResponseApp.response(
             res,
-            await factory.saveCourse(res["locals"].authorization,req["body"].data),
+            await factory.saveCourse(res["locals"].authorization,req["body"]),
             'Se obtubo el perfil correctamente'
         )
     }

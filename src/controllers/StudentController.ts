@@ -11,4 +11,13 @@ export class StudentController {
             'Se obtubo el perfil correctamente'
         )
     }
+
+    public async updateStarOfCourse (req: Request, res: Response) {
+        const factory = new StudentFactory()
+        ResponseApp.response(
+            res,
+            await factory.getProfile(res["locals"].authorization, req["params"].studentId),
+            'Se obtubo el perfil correctamente'
+        )
+    }
 }

@@ -3,7 +3,7 @@ import * as sha256 from 'sha256'
 import * as uuidv1 from 'uuid/v1'
 import {ConfigApp} from '../../../config/ConfigApp'
 import {TokenRepository} from "../../domain/repository/TokenRepository";
-
+require("dotenv").config();
 export class Jwt implements TokenRepository{
     public generate(content) {
         let payload = {

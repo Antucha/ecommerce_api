@@ -22,4 +22,9 @@ export class StudentFactory {
         return await this.service.getProfile(auth, studentId)
     }
 
+    
+    public async updateStarOfCourse (auth: AuthInterface, studentId) {
+        return await this.service.getProfile(auth, studentId)
+    }
+
 }

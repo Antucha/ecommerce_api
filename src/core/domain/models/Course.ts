@@ -59,6 +59,6 @@ export class Course extends Model<Course> {
         course.state = state?state:'1'
         course.createdAt = new Date()
 
-        return new Course();
+        return course;
     }
 }

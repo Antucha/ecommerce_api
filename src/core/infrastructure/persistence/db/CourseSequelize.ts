@@ -14,8 +14,17 @@ export class CourseSequelize extends ModelRepository  implements CourseRepositor
     }
 
     public async getAll(auth, request){
+        let WHERE={
+            state: '1'
+        }
+        if(auth.role=='author'){
+            WHERE["authorId"] = auth.authorId
+        }
+        if(auth.role == 'student'){
+
+        }
         return  await this.model.findAll({
-            //where: { id: courseId}
+            where: WHERE
         })
     }
 }

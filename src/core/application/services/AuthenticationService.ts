@@ -49,9 +49,9 @@ export class AuthenticationService {
         console.log('request: ', request)
         switch (request.role) {
             case UserRoleEnum.STUDENT:
-                return this.studentLogin(request);
+                return this.studentLogin(request); break;
             case UserRoleEnum.AUTHOR:
-                return this.authorLogin(request);
+                return this.authorLogin(request); break;
             default:
                 ErrorCustom.generate(badRequest('No es el rol autorizado'))
         }
@@ -61,6 +61,7 @@ export class AuthenticationService {
     private async studentLogin (request: LoginRequest) {
 
         const STUDENT:Student = await this.studentRepository.getByEmailAndRole(request.email, request.role)
+        console.log('STUDENT: ', STUDENT)
         if (!STUDENT) {
             ErrorCustom.generate(notFound('User doesnt exist'))
         }
@@ -68,14 +69,17 @@ export class AuthenticationService {
         console.log('estudianteee: ', STUDENT)
 
         const isCorrectPassword = compareSync(request.password, STUDENT.user.password);
+        console.log('isCorrectPassword: ', isCorrectPassword)
 
         // Comentar en caso de no validar
         if (! isCorrectPassword) {
             ErrorCustom.generate(unauthorized('Unauthorized user'))
         }
+        console.log('PASO EL PASWORD')
 
         this.trackLogin(STUDENT.userId)
 
+        console.log('PASO EL TRACKINIG')
 
         return TokenStudentPresentation.build(STUDENT, this.token)
     }
@@ -83,6 +87,8 @@ export class AuthenticationService {
     private async authorLogin (request: LoginRequest) {
         
         const AUTHOR:Author = await this.authorRepository.getByEmailAndRole(request.email, request.role)
+        console.log('AUTHOR: ', AUTHOR)
+
         if (!AUTHOR) {
             ErrorCustom.generate(notFound('User doesnt exist'))
         }
@@ -118,7 +124,7 @@ export class AuthenticationService {
             password,
             (request.role) ? request.role : 'user'
         );
-        //await USER.save()
+        await USER.save()
         
         let USER_TYPE :any;
         switch (request.role) {
